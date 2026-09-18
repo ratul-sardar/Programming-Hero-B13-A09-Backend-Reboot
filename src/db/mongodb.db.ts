@@ -27,5 +27,8 @@ const connectDB = async () => {
 		console.log(error);
 	}
 };
-
+// To connect to the database
 export default connectDB;
+
+export const dataBase = client.db("drive-fleet");
+export const carsCollection = client.db("drive-fleet").collection("cars");
