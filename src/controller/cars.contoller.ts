@@ -5,7 +5,16 @@ import { carsCollection } from "../db/mongodb.db.ts";
 // Get all the cars from the collection
 export const getCars: RequestHandler = async (req, res, next) => {
 	try {
-		const cars = await carsCollection.find().toArray();
+		const search = req.query.search;
+		const type = req.query.type;
+
+		const filter: any = {};
+		if (search) {
+			filter.name = { $regex: search, $options: "i" };
+		}
+		if (type) filter.type = type;
+
+		const cars = await carsCollection.find(filter).toArray();
 
 		res.send(cars);
 	} catch (err) {
