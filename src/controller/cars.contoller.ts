@@ -2,6 +2,19 @@ import type { RequestHandler } from "express";
 import { ObjectId } from "mongodb";
 import { carsCollection } from "../db/mongodb.db.ts";
 
+// Get user added cars from the collection
+export const getUserAddedCars: RequestHandler = async (req, res, next) => {
+	try {
+		const userId = req.params.userId as string;
+
+		const cars = await carsCollection.find({ owner: userId }).toArray();
+
+		res.send(cars);
+	} catch (err) {
+		next(err);
+	}
+};
+
 // Get all the cars from the collection
 export const getCars: RequestHandler = async (req, res, next) => {
 	try {
