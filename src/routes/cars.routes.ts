@@ -6,7 +6,7 @@ import {
 	getCars,
 	getUserAddedCars,
 	updateCar,
-} from "../controller/cars.contoller.ts";
+} from "../controller/cars.controller.ts";
 
 const carRouter = Router();
 

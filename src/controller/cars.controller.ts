@@ -21,7 +21,7 @@ export const getCars: RequestHandler = async (req, res, next) => {
 		const search = req.query.search;
 		const type = req.query.type;
 
-		const filter: any = {};
+		const filter: Record<string, any> = {};
 		if (search) {
 			filter.name = { $regex: search, $options: "i" };
 		}

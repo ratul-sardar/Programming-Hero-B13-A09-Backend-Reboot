@@ -31,4 +31,5 @@ const connectDB = async () => {
 export default connectDB;
 
 export const dataBase = client.db("drive-fleet");
-export const carsCollection = client.db("drive-fleet").collection("cars");
+export const carsCollection = dataBase.collection("cars");
+export const bookingCollection = dataBase.collection("bookings");
