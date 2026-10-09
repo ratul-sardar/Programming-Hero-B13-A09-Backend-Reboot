@@ -17,6 +17,8 @@ export const verifyJWT: RequestHandler = async (req, res, next) => {
 		console.log(
 			`Error form jwt verification middleware, error message: ${error.message}`,
 		);
+
+		next(error);
 	}
 };
 
