@@ -15,7 +15,7 @@ carRouter.get("/", getCars);
 carRouter.get("/:id", getCar);
 carRouter.get("/user-added-cars/:userId", verifyJWT, getUserAddedCars);
 carRouter.post("/", verifyJWT, addCar);
-carRouter.patch("/:id", updateCar);
+carRouter.patch("/:id", verifyJWT, updateCar);
 carRouter.delete("/:id", verifyJWT, deleteCar);
 
 export default carRouter;
