@@ -1,6 +1,7 @@
 # Drive Fleet — Backend API
 
-**Live API:** Not deployed yet — add the production API URL here when available.
+**Live API:** [https://programming-hero-b13-a09-backend-reboot.onrender.com](https://programming-hero-b13-a09-backend-reboot.onrender.com)  
+**GitHub:** [Programming-Hero-B13-A09-Backend-Reboot](https://github.com/ratul-sardar/Programming-Hero-B13-A09-Backend-Reboot)
 
 This repository contains the REST API for Drive Fleet, a car-rental application. The API stores vehicle listings and booking records in MongoDB and serves data to the Next.js frontend.
 
@@ -30,7 +31,7 @@ npm install
 npm run dev
 ```
 
-The API defaults to [http://localhost:8001](http://localhost:8001). The development command uses Node's watch mode to run `src/index.ts`.
+The API defaults to [http://localhost:8800](http://localhost:8800). The development command uses Node's watch mode to run `src/index.ts`.
 
 ## API routes
 
@@ -54,11 +55,12 @@ Create a `.env` file in this backend directory. Do not commit database credentia
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/drive-fleet
-SERVER_URI=8001
+PORT=8800
+CLIENT_URI=http://localhost:3888
 ```
 
-Despite its name, `SERVER_URI` is used as the listening port in the current server implementation; use a port number such as `8001`.
+`PORT` controls the listening port; Render supplies it automatically in production. `CLIENT_URI` must match the frontend origin and is used to verify Better Auth JWTs. On Render, set it to `https://programming-hero-b13-a09-frontend-r.vercel.app`.
 
 ## Related project
 
-The web application is maintained in [`../programming-hero-b13-a09-frontend-reboot`](../programming-hero-b13-a09-frontend-reboot/README.md).
+The web application is maintained in the [frontend GitHub repository](https://github.com/ratul-sardar/Programming-Hero-B13-A09-Frontend-Reboot-) and is [deployed on Vercel](https://programming-hero-b13-a09-frontend-r.vercel.app/).
