@@ -11,7 +11,7 @@ const app: Express = express();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.SERVER_URI || 8001;
+const port = process.env.PORT || 8800;
 
 // All the routes
 app.use("/api/v1/cars", carRouter);
