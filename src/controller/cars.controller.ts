@@ -1,6 +1,7 @@
 import type { RequestHandler } from "express";
 import { ObjectId } from "mongodb";
 import { carsCollection } from "../db/mongodb.db.ts";
+import { validateToken } from "../middleware/jwt.middleware.ts";
 
 // Get user added cars from the collection
 export const getUserAddedCars: RequestHandler = async (req, res, next) => {
@@ -88,10 +89,19 @@ export const updateCar: RequestHandler = async (req, res, next) => {
 export const deleteCar: RequestHandler = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const carId = id as string; // without the "as string" force type. typescript is giving warning in the ObjectId()
+		const carId = id as string;
+
+		const JWTToken = req.headers.authorization?.split(" ")[1];
+		const payload = await validateToken(JWTToken as string);
+		const { id: UserId } = payload;
+
+		// Checking if the car belongs to the requested user
+		const carsUser = await carsCollection.findOne({ _id: new ObjectId(carId) });
+		if (carsUser?.owner !== UserId) {
+			throw new Error("You are not authorized to delete this car");
+		}
 
 		const cars = await carsCollection.deleteOne({ _id: new ObjectId(carId) });
-
 		res.send(cars);
 	} catch (err) {
 		next(err);

@@ -7,14 +7,15 @@ import {
 	getUserAddedCars,
 	updateCar,
 } from "../controller/cars.controller.ts";
+import { verifyJWT } from "../middleware/jwt.middleware.ts";
 
 const carRouter = Router();
 
 carRouter.get("/", getCars);
 carRouter.get("/:id", getCar);
-carRouter.get("/user-added-cars/:userId", getUserAddedCars);
-carRouter.post("/", addCar);
+carRouter.get("/user-added-cars/:userId", verifyJWT, getUserAddedCars);
+carRouter.post("/", verifyJWT, addCar);
 carRouter.patch("/:id", updateCar);
-carRouter.delete("/:id", deleteCar);
+carRouter.delete("/:id", verifyJWT, deleteCar);
 
 export default carRouter;
